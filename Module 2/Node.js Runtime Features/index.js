@@ -25,6 +25,16 @@ const OUTPUT = path.join(__dirname, 'sample-copy.txt');
 function readWholeFile() {
   // TODO: use fs.readFile(INPUT, callback). With no encoding, the callback
   //       receives a Buffer.
+  fs.readFile(INPUT,(err,data)=>{
+    if(err){
+      console.error(err);
+      return;
+    }
+
+    console.log(`readFile: loaded  bytes${data.length} into memory`)
+
+  }
+  )
   // TODO: if there is an error, log it and return.
   // TODO: log the size in bytes. A Buffer has a .length property (bytes).
   //       Example log: "readFile: loaded 524288 bytes into memory".
@@ -33,19 +43,36 @@ function readWholeFile() {
 // ── PART 2: stream the file and pipe it to a writable stream ────────────────
 function streamFile() {
   // TODO: create a readable stream with fs.createReadStream(INPUT).
+  const readable = fs.createReadStream(INPUT);
+  const writable = fs.createWriteStream(OUTPUT);
   // TODO: create a writable stream with fs.createWriteStream(OUTPUT).
+  readable.pipe(writable);
+  writable.on("finish",()=>{
+    console.log(`stream: finished copying via 64KB chunks (flat memory)`)
+  })
   // TODO: pipe the readable into the writable: readable.pipe(writable).
   // TODO: listen for the writable's "finish" event and log a done message,
   //       e.g. "stream: finished copying via 64KB chunks (flat memory)".
+    readable.on('error', (err) => {
+    console.error(err);
+  });
+
+  writable.on('error', (err) => {
+    console.error(err);
+  });
 }
 
 // ── PART 3: explain the difference ──────────────────────────────────────────
 // TODO: In your OWN words, replace this comment with 2 to 3 sentences on WHY
 //       the stream approach is preferable for large files. Mention memory:
-//       readFile holds the whole file at once; the stream moves it in chunks
+//       readFile holdss the whole file at once; the stream moves it in chunks
 //       so peak memory stays flat regardless of file size.
 //
 // YOUR EXPLANATION:
+// readFile loads the entire file into memory before your program can use it.
+// This works well for small files but can consume a lot of memory for large files.
+// Streams process the file in small chunks, so memory usage stays nearly constant,
+// making streams much more efficient for large files.
 //
 
 // Run both approaches.
