@@ -1,5 +1,7 @@
 # Backend Web Development — Assignments
 
+[![CI](https://github.com/nishantgulia003-netizen/Backend-Web-Development/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nishantgulia003-netizen/Backend-Web-Development/actions/workflows/ci.yml)
+
 Welcome! This repository holds the **starter code** for the hands-on assignments in the
 **Backend Web Development** course. It is shared with **both students and mentors**.
 
