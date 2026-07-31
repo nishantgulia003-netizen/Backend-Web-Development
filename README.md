@@ -3,6 +3,8 @@
 Welcome! This repository holds the **starter code** for the hands-on assignments in the
 **Backend Web Development** course. It is shared with **both students and mentors**.
 
+> GitHub verification note: this repository now includes a simple CI workflow that runs on pushes to main.
+
 You will build real backend skills the way working engineers do: by writing code,
 pushing it to a branch, and opening a **Pull Request (PR)** for review.
 
